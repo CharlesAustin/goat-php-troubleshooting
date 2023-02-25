@@ -20,7 +20,7 @@ $text .= "Here's what I found!.\n\n";
 print $text;
 
 function get_author_list() {
-    $api_url = "https://reststop.randohouse.com/resources/authors?lastName=Harkenss";
+    $api_url = "https://reststop.randomhouse.com/resources/authors?lastName=Harkness";
     $booklist = call_api($api_url);
 
     $output = "Here is a list of authors I found:\n\n";

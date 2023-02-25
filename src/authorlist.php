@@ -7,7 +7,7 @@
  */
 
 // Let's set up our text to be displayed.
-$text .= "We're going to search for authors with the last name 'Harkness' and see what comes back!\n\n";
+$text = "We're going to search for authors with the last name 'Harkness' and see what comes back!\n\n";
 
 // Grab a list of authors from the Random House Publishing API, and pop it into
 // the $text directory.

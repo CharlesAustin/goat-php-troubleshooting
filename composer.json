@@ -1,0 +1,19 @@
+{
+    "name": "meetgoat/php-skeleton",
+    "description": "Skeleton PHP project for Goat clients",
+    "type": "project",
+    "require-dev": {
+        "codeception/codeception": "^4.1",
+        "overtrue/phplint": "^3.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "authors": [
+        {
+            "name": "Darren James Harkness",
+            "email": "darren.harkness@meetgoat.com"
+        }
+    ],
+    "require": {
+        "twitter/bootstrap": "^5.1"
+    }
+}

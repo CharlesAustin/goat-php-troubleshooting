@@ -1,0 +1,4 @@
+# Default robots.txt for staging
+
+User-agent: *
+Disallow: /

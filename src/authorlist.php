@@ -19,22 +19,43 @@ $text .= "Here's what I found!.\n\n";
 
 print $text;
 
-function get_author_list() {
-    $api_url = "https://reststop.randomhouse.com/resources/authors?lastName=Harkness";
-    $booklist = call_api($api_url);
+function get_author_list()
+{
+    $api_url = "https://openlibrary.org/search/authors.json?q=Harkness&limit=5";
+    $authorlist = call_api($api_url);
 
-    $output = "Here is a list of authors I found:\n\n";
+    if ($authorlist->numFound === 0) {
+        $output = "No authors by that name!";
 
-    foreach ($booklist as $book) {
-        $output .= "  - {$book->authordisplay}\n";
+        return $output;
+        
+    } else {
+        $output = "Here is a list of authors I found:\n\n";
+
+        foreach ($authorlist->docs as $author) {
+
+            $works_url = "https://openlibrary.org/authors/" . $author->key . "/works.json?limit=5";
+            $workslist = call_api($works_url);
+            $output .= "  - {$author->name}\n";
+
+            if (empty($workslist->entries)) {
+                $output .= "   No works for this author!\n";
+            } else {
+                foreach ($workslist->entries as $work) {
+                    $output .= "   * {$work->title}\n";
+                }
+            }
+            
+            $output .= "\n";
+        }
+
+        return $output;
     }
-
-    return $output;
-
 }
 
 
-function call_api($url) {
+function call_api($url)
+{
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));
@@ -43,8 +64,4 @@ function call_api($url) {
     curl_close($ch);
 
     return $api_return;
-
 }
-
-
-
